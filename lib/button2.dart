@@ -4,7 +4,8 @@ class myButton2 extends StatefulWidget {
   final String text;
   final Color tColor ;
   final Color buttonBgColor;
-  const myButton2({super.key, required this.text, this.buttonBgColor=const Color(0xFF296D98),this.tColor=Colors.white });
+  final Function(String) onButtonPressed;
+  const myButton2({super.key, required this.text, this.buttonBgColor=const Color(0xFF296D98),this.tColor=Colors.white, required this.onButtonPressed });
 
   @override
   State<myButton2> createState() => _myButton1State();
@@ -24,7 +25,7 @@ class _myButton1State extends State<myButton2> {
             padding: const EdgeInsets.all(0),
             backgroundColor: widget.buttonBgColor,
           ),
-          onPressed: (){},
+          onPressed: () => widget.onButtonPressed(widget.text),
           child:  Text(widget.text ,style: TextStyle(
             fontWeight: FontWeight.bold,
             color: widget.tColor,

@@ -1,5 +1,6 @@
 import 'package:calculator/button2.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 import 'button.dart';
 
@@ -11,6 +12,35 @@ class calculator extends StatefulWidget {
 }
 
 class _calculatorState extends State<calculator> {
+
+  /// variables
+  double firstNum=0.0;
+  double secondNum=0.0;
+  var input='';
+  var output='';
+  var operation='';
+  onButtonClick(value){
+    if (value == "C" ){ input=''; output='';}
+    else if (value == "="){ var userInput= input;
+      userInput= input.replaceAll("X", "*");
+      Parser p = Parser();
+      Expression expression = p.parse(userInput);
+      ContextModel cm = ContextModel();
+      var finalValue = expression.evaluate(EvaluationType.REAL, cm);
+      output=finalValue.toString();
+      if(output.endsWith(".0")){output = output.substring(0, output.length-2);};
+      input=output;
+
+    }
+    else{
+      input = input + value;
+    }
+    setState(() {
+
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -31,7 +61,7 @@ class _calculatorState extends State<calculator> {
             alignment: Alignment.centerRight,
             padding: EdgeInsets.all(20),
             child: Text(
-              "15 + 32 + 8",
+              input,
               style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white,fontSize: 30),
             ),
           ),
@@ -43,7 +73,7 @@ class _calculatorState extends State<calculator> {
             alignment: Alignment.centerRight,
             padding: EdgeInsets.all(20),
             child: Text(
-              "55",
+              output,
               style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white,fontSize: 40),
             ),
           ),
@@ -57,49 +87,49 @@ class _calculatorState extends State<calculator> {
                     children: [
                       TableRow(
                           children: [
-                            myButton1(text: "V"),
-                            myButton1(text: "C"),
-                            myButton1(text: "X"),
+                            myButton1(text: "V",onButtonPressed: onButtonClick,),
+                            myButton1(text: "C",onButtonPressed: onButtonClick,),
+                            myButton1(text: "X",onButtonPressed: onButtonClick,),
 
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "("),
-                            myButton1(text: ")"),
-                            myButton1(text: "%"),
+                            myButton1(text: "(",onButtonPressed: onButtonClick,),
+                            myButton1(text: ")",onButtonPressed: onButtonClick,),
+                            myButton1(text: "%",onButtonPressed: onButtonClick,),
 
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "1"),
-                            myButton1(text: "2"),
-                            myButton1(text: "3"),
+                            myButton1(text: "1",onButtonPressed: onButtonClick,),
+                            myButton1(text: "2",onButtonPressed: onButtonClick,),
+                            myButton1(text: "3",onButtonPressed: onButtonClick,),
 
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "4"),
-                            myButton1(text: "5"),
-                            myButton1(text: "6"),
+                            myButton1(text: "4",onButtonPressed: onButtonClick,),
+                            myButton1(text: "5",onButtonPressed: onButtonClick,),
+                            myButton1(text: "6",onButtonPressed: onButtonClick,),
 
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "7"),
-                            myButton1(text: "8"),
-                            myButton1(text: "9"),
+                            myButton1(text: "7",onButtonPressed: onButtonClick,),
+                            myButton1(text: "8",onButtonPressed: onButtonClick,),
+                            myButton1(text: "9",onButtonPressed: onButtonClick,),
 
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "0"),
-                            myButton1(text: "00"),
-                            myButton1(text: "."),
+                            myButton1(text: "0",onButtonPressed: onButtonClick,),
+                            myButton1(text: "00",onButtonPressed: onButtonClick,),
+                            myButton1(text: ".",onButtonPressed: onButtonClick,),
 
                           ]
                       )
@@ -112,27 +142,27 @@ class _calculatorState extends State<calculator> {
                     children: [
                       TableRow(
                           children: [
-                            myButton1(text: "/"),
+                            myButton1(text: "/",onButtonPressed: onButtonClick,),
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "*"),
+                            myButton1(text: "*",onButtonPressed: onButtonClick,),
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "-"),
+                            myButton1(text: "-",onButtonPressed: onButtonClick,),
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton1(text: "+"),
+                            myButton1(text: "+",onButtonPressed: onButtonClick,),
                           ]
                       ),
                       TableRow(
                           children: [
-                            myButton2(text: "="),
+                            myButton2(text: "=",onButtonPressed: onButtonClick,),
                           ]
                       ),
                     ],
