@@ -29,7 +29,7 @@ class _calculatorState extends State<calculator> {
       var finalValue = expression.evaluate(EvaluationType.REAL, cm);
       output=finalValue.toString();
       if(output.endsWith(".0")){output = output.substring(0, output.length-2);};
-     
+
 
     }
     else{
